@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tidewrit | Celebration Trips, Verified</title>
+<meta name="description" content="Trips, staycations, baecations and getaways, planned with a real budget and photo-verified stays. Give us your budget and an idea. We handle the rest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script src="atlas-data.js" defer></script>
+</head>
+<body data-page="index.html">
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Trips &amp; getaways, verified</div>
+      <h1>Your escape planner<br>for <em>perfect trips</em></h1>
+      <p class="lead">Honeymoons, baecations, staycations, birthday getaways or just a weekend off. Give us your budget and an idea of what you want. We build the full plan with a real budget, and check every stay against recent guest photos first.</p>
+      <p class="sub">Because no getaway, big or small, should be planned from a listing photo taken five years ago.</p>
+      <ul class="trust-bullets">
+        <li><span class="t">✓</span>Realistic budget with the hidden costs included</li>
+        <li><span class="t">✓</span>Every stay photo-checked against recent guest photos</li>
+        <li><span class="t">✓</span>A human confirms scope with you before you pay</li>
+      </ul>
+      <div class="hero-proof" style="margin-top:26px;">
+        <div class="proof-dots"><span>M</span><span>D</span><span>S</span></div>
+        <span class="stars">★★★★★</span> Plans delivered for honeymooners, baecationers, birthday crews &amp; weekend escapers
+      </div>
+    </div>
+
+    <div class="form-card" id="request">
+      <div id="formBody">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <h3 id="stepTitle">What are we celebrating?</h3>
+          <span id="stepCount" style="font-size:11.5px; color:#9AA3B5; font-weight:700;">1 / 3</span>
+        </div>
+        <div class="fc-sub" id="stepSub">Takes about a minute. No payment now.</div>
+        <div style="display:flex; gap:6px; margin-bottom:20px;">
+          <span class="stepdot on" style="height:4px; flex:1; border-radius:2px; background:var(--blue);"></span>
+          <span class="stepdot" style="height:4px; flex:1; border-radius:2px; background:#E4EAF6;"></span>
+          <span class="stepdot" style="height:4px; flex:1; border-radius:2px; background:#E4EAF6;"></span>
+        </div>
+
+        <!-- STEP 1: occasion & vibe -->
+        <div class="fstep" id="fstep1">
+          <label class="f-label">This trip is for</label>
+          <div class="pill-row" data-group="occasion">
+            <button type="button" class="pill" data-value="Baecation">💕 Baecation</button>
+            <button type="button" class="pill" data-value="Staycation">🏡 Staycation</button>
+            <button type="button" class="pill" data-value="Vacation">🌍 Vacation</button>
+            <button type="button" class="pill" data-value="Weekend Getaway">⛱️ Getaway</button>
+            <button type="button" class="pill" data-value="Honeymoon">💍 Honeymoon</button>
+            <button type="button" class="pill" data-value="Birthday">🎂 Birthday</button>
+            <button type="button" class="pill" data-value="Anniversary">🥂 Anniversary</button>
+            <button type="button" class="pill" data-value="Other">✨ Something else</button>
+          </div>
+          <label class="f-label">The mood you want</label>
+          <div class="pill-row" data-group="mood">
+            <button type="button" class="pill" data-value="Romantic">Romantic</button>
+            <button type="button" class="pill" data-value="Adventure">Adventure</button>
+            <button type="button" class="pill" data-value="Relaxation">Relaxation</button>
+            <button type="button" class="pill" data-value="Luxury on a budget">Luxury on a budget</button>
+            <button type="button" class="pill" data-value="Cultural">Cultural</button>
+          </div>
+          <label class="f-label">Who's going?</label>
+          <div class="pill-row" data-group="triptype">
+            <button type="button" class="pill" data-value="Couple">💑 Couple(s)</button>
+            <button type="button" class="pill" data-value="Family trip">👨‍👩‍👧 Family</button>
+            <button type="button" class="pill" data-value="Girls trip">👯‍♀️ Girls trip</button>
+            <button type="button" class="pill" data-value="Boys trip">🕺 Boys trip</button>
+            <button type="button" class="pill" data-value="Friends">🎉 Friends</button>
+            <button type="button" class="pill" data-value="Work trip">💼 Work trip</button>
+            <button type="button" class="pill" data-value="Solo">🙋 Solo</button>
+          </div>
+          <div id="couplesRow" style="display:none; margin-top:14px;">
+            <label class="f-label" style="margin-top:0;">How many couples?</label>
+            <div class="stepper" data-for="couples">
+              <button type="button" class="stp-btn" data-d="-1">−</button>
+              <span class="stp-val" id="couplesVal">1 couple</span>
+              <button type="button" class="stp-btn" data-d="1">+</button>
+            </div>
+          </div>
+          <div class="frow" style="margin-top:14px;">
+            <div>
+              <label class="f-label" style="margin-top:0;">Adults</label>
+              <div class="stepper" data-for="adults">
+                <button type="button" class="stp-btn" data-d="-1">−</button>
+                <span class="stp-val" id="adultsVal">2</span>
+                <button type="button" class="stp-btn" data-d="1">+</button>
+              </div>
+            </div>
+            <div>
+              <label class="f-label" style="margin-top:0;">Kids</label>
+              <div class="stepper" data-for="kids">
+                <button type="button" class="stp-btn" data-d="-1">−</button>
+                <span class="stp-val" id="kidsVal">0</span>
+                <button type="button" class="stp-btn" data-d="1">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: numbers & dates -->
+        <div class="fstep" id="fstep2" style="display:none;">
+          <label class="f-label">Your passport / nationality</label>
+          <select id="passportSel" style="width:100%; background:#F7F9FD; border:1px solid var(--line); color:var(--ink); padding:13px 14px; border-radius:12px; font-size:15px; font-family:inherit;">
+            <option value="">Choose your passport...</option>
+          </select>
+          <div style="font-size:12px; color:#9AA3B5; margin:6px 0 0;">Visa rules depend on your passport, not where you fly from. We check them for you.</div>
+          <label class="f-label">Flying from</label>
+          <input type="text" id="fromInput" placeholder="Entebbe, Uganda">
+          <label class="f-label">Total budget</label>
+          <input type="range" id="budgetSlider" min="25" max="10000" step="25" value="500" aria-label="Budget">
+          <div class="budget-readout"><span>$25</span><strong id="budgetVal">$500</strong><span>$10,000+</span></div>
+          <div id="ugxHint" style="text-align:center; font-size:12px; color:#9AA3B5; margin-top:4px;">≈ UGX 1,850,000 · mobile money or card</div>
+          <label class="f-label">Travel window</label>
+          <div class="frow">
+            <input type="date" id="dateFrom" aria-label="Earliest date">
+            <input type="date" id="dateTo" aria-label="Latest date">
+          </div>
+          <label class="f-label">Which country calls you?</label>
+          <select id="countrySel" style="width:100%; background:#F7F9FD; border:1px solid var(--line); color:var(--ink); padding:13px 14px; border-radius:12px; font-size:15px; font-family:inherit;">
+            <option value="">Choose a country...</option>
+          </select>
+          <div id="destWrap" style="display:none;">
+            <label class="f-label" id="destLabel">Where in the country? Pick any</label>
+            <div class="pill-row chips" id="destChips"></div>
+          </div>
+          <div id="spotWrap"></div>
+          <div id="otherWrap" style="display:none;">
+            <label class="f-label">Tell us where</label>
+            <input type="text" id="destInput" placeholder="Any country, any place...">
+          </div>
+          <button type="button" class="pill" id="surpriseBtn" style="margin-top:14px;">✨ Surprise me, you choose</button>
+        </div>
+
+        <!-- STEP 3: contact + summary -->
+        <div class="fstep" id="fstep3" style="display:none;">
+          <div id="miniSummary" style="background:#F7F9FD; border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:13px; color:#414B5F; line-height:1.7; margin-bottom:16px;"></div>
+          <input type="text" id="hp_company" name="company" tabindex="-1" autocomplete="off" style="position:absolute; left:-5000px; height:0; width:0; opacity:0;" aria-hidden="true">
+          <label class="f-label">Your name</label>
+          <input type="text" id="nameInput" placeholder="Your name">
+          <label class="f-label">Your email</label>
+          <input type="email" id="emailInput" placeholder="you@email.com" required>
+          <label class="f-label">Your WhatsApp</label>
+          <input type="text" id="waInput" placeholder="+256...">
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:24px;">
+          <button type="button" class="btn btn-ghost" id="backBtn" style="display:none; flex:1;">← Back</button>
+          <button type="button" class="btn btn-coral" id="nextBtn" style="flex:2;">Next →</button>
+        </div>
+        <div class="f-fine">After you submit, we send a payment link by email and WhatsApp. Your plan is built once payment confirms and delivered within 3–5 days. Prices in USD, pay by MTN/Airtel mobile money or card. By sending your request and completing payment you agree to our <a href="terms.html" target="_blank" style="color:var(--blue); font-weight:600;">Terms &amp; Conditions</a> (including our <a href="terms.html#privacy" target="_blank" style="color:var(--blue); font-weight:600;">privacy practices</a>).</div>
+      </div>
+
+      <div class="f-success" id="formSuccess">
+        <div class="big">🎉</div>
+        <h4>Request received</h4>
+        <p>Check your email and WhatsApp: we're sending your payment link now. The moment payment confirms, we start building, and your private trip page arrives within 3–5 days.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>Three steps. One plan you can actually trust.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Tell us the occasion</h3><p>Staycation, baecation, big trip or quick getaway. Your budget, dates, who's coming, and the mood. Then complete payment via the link we send you by email and WhatsApp.</p></div>
+      <div class="step"><div class="num">02</div><h3>We research &amp; verify</h3><p>Once payment confirms, research starts: day-by-day itinerary, realistic budget with hidden costs included, every stay cross-checked against recent guest photos.</p></div>
+      <div class="step"><div class="num">03</div><h3>Your trip page arrives</h3><p>You get your private link and passcode by email and WhatsApp: full itinerary, budget, verified stays, map, and an AI assistant. Every trip saves to your account.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="feat-row">
+      <div class="feat"><div class="ic b1"><svg style="color:#E1654A" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2.5"/><path d="M3 10h18M16.5 15h.01"/></svg></div><div><h4>Real Cost Breakdown</h4><p>The true cost of your trip including flights, stay, food, activities and hidden costs.</p></div></div>
+      <div class="feat"><div class="ic b2"><svg style="color:#22A06B" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg></div><div><h4>Personalized Itineraries</h4><p>Day-by-day plans tailored to your preferences, budget and travel style.</p></div></div>
+      <div class="feat"><div class="ic b3"><svg style="color:#6D28D9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9zM2 9h20M12 21L8 9l4-6 4 6z"/></svg></div><div><h4>Smart Recommendations</h4><p>Curated destinations, stays, activities and restaurants matched to your vibe.</p></div></div>
+      <div class="feat"><div class="ic b4"><svg style="color:#F59E0B" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.6-3.4 7.6-8 9-4.6-1.4-8-4.4-8-9V6zM9 12l2 2 4-4.5"/></svg></div><div><h4>Travel with Confidence</h4><p>Photo-verified stays, safety notes and local insight so you travel worry-free.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint" id="destinations">
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow center">Popular escapes</div>
+      <h2>Discover amazing places</h2>
+      <p>Hand-planned destinations loved by our travelers, from weekend getaways to the big one.</p>
+    </div>
+    <div class="dest-grid">
+      <a class="dest-card" href="#request" style="background:linear-gradient(160deg,#2E6BFF,#7FC8F8);">
+        <img src="images/zanzibar.jpg" alt="Zanzibar" loading="lazy" onerror="this.remove()">
+        <span class="dest-tag">Romantic</span>
+        <div class="dest-info"><h3>Zanzibar</h3><div class="d-meta"><span>From $950 · 5 days</span><span class="stars">★ 4.8</span></div></div>
+      </a>
+      <a class="dest-card" href="#request" style="background:linear-gradient(160deg,#0E9F6E,#7FE0B0);">
+        <img src="images/jinja.jpg" alt="Jinja getaway" loading="lazy" onerror="this.remove()">
+        <span class="dest-tag">Adventure</span>
+        <div class="dest-info"><h3>Jinja, Uganda</h3><div class="d-meta"><span>From $120 · 2 days</span><span class="stars">★ 4.7</span></div></div>
+      </a>
+      <a class="dest-card" href="#request" style="background:linear-gradient(160deg,#F59E0B,#FBD38D);">
+        <img src="images/diani.jpg" alt="Diani Beach" loading="lazy" onerror="this.remove()">
+        <span class="dest-tag">Beach</span>
+        <div class="dest-info"><h3>Diani, Kenya</h3><div class="d-meta"><span>From $520 · 4 days</span><span class="stars">★ 4.8</span></div></div>
+      </a>
+      <a class="dest-card" href="#request" style="background:linear-gradient(160deg,#6D28D9,#B197FC);">
+        <img src="images/capetown.jpg" alt="Cape Town" loading="lazy" onerror="this.remove()">
+        <span class="dest-tag">City Break</span>
+        <div class="dest-info"><h3>Cape Town</h3><div class="d-meta"><span>From $780 · 5 days</span><span class="stars">★ 4.7</span></div></div>
+      </a>
+    </div>
+    <p style="text-align:center; margin-top:22px; font-size:13px; color:var(--grey);">Sample starting budgets for two, verified per request. Staycations from $30.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap grid-2">
+    <div>
+      <div class="eyebrow">Why Tidewrit</div>
+      <h2 style="font-size:clamp(26px,4vw,34px); line-height:1.14; margin-bottom:22px;">Anyone can generate an itinerary. We verify one.</h2>
+      <p style="color:#454D4A; font-size:15.5px; margin-bottom:10px;">We compare listing photos against what guests actually posted in the last 90 days. If they don't match, it doesn't make your plan, and we tell you why.</p>
+      <p style="color:#454D4A; font-size:15.5px;">Visa fees, resort taxes, transfers, tipping norms: the costs other planners leave out are the ones that blow budgets. Ours are in from the start.</p>
+      <a href="services.html" class="btn btn-ghost" style="margin-top:24px;">See everything a plan covers</a>
+    </div>
+    <div class="compare-card">
+      <div class="compare-row head"><span>What you get</span><span style="text-align:center;">Tidewrit</span><span style="text-align:center;">Generic AI</span></div>
+      <div class="compare-row"><span>Day-by-day itinerary</span><span class="yes">✓</span><span class="yes" style="color:#B8B2A6;">✓</span></div>
+      <div class="compare-row"><span>Hidden costs included</span><span class="yes">✓</span><span class="no">×</span></div>
+      <div class="compare-row"><span>Stays checked vs. recent guest photos</span><span class="yes">✓</span><span class="no">×</span></div>
+      <div class="compare-row"><span>Listings flagged &amp; excluded, with reasons</span><span class="yes">✓</span><span class="no">×</span></div>
+      <div class="compare-row"><span>A human re-checks before you book</span><span class="yes">✓</span><span class="no">×</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap grid-2">
+    <div class="plan-doc">
+      <div class="stamp">Sample<br>Plan</div>
+      <h4>Zanzibar · 7 Nights</h4>
+      <div class="doc-sub">Anniversary trip · 2 travelers · prepared June 2026</div>
+      <div class="doc-line"><span>Flights (RT, 2 pax)</span><strong>$1,450–2,100</strong></div>
+      <div class="doc-line"><span>Stay (photo-verified)</span><strong>$980–2,400</strong></div>
+      <div class="doc-line"><span>Food, transport &amp; activities</span><strong>$910–1,510</strong></div>
+      <div class="doc-line"><span>Visa + hidden costs</span><strong>$250–400</strong></div>
+      <div class="doc-line total"><span>Realistic total</span><strong>$3,590–6,410</strong></div>
+      <div class="doc-flag">⚑ 2 resorts excluded. Recent guest photos showed a pool that didn't match the listing.</div>
+    </div>
+    <div>
+      <div class="eyebrow">Inside every plan</div>
+      <h2 style="font-size:clamp(26px,4vw,34px); line-height:1.14; margin-bottom:20px;">What lands in your inbox.</h2>
+      <ul class="trust-bullets">
+        <li><span class="t">✓</span><span><strong>A realistic budget range,</strong> not one made-up number, with notes on how to land at the low end.</span></li>
+        <li><span class="t">✓</span><span><strong>Day-by-day itinerary</strong> with rest built in, and one marquee celebration moment worth the splurge.</span></li>
+        <li><span class="t">✓</span><span><strong>2–3 verified stays</strong> with our photo trust-check on each, plus anything we rejected, and why.</span></li>
+        <li><span class="t">✓</span><span><strong>The hidden cost list:</strong> visa, taxes, tipping norms, transfers, so nothing ambushes you at the airport.</span></li>
+      </ul>
+      <a href="pricing.html" class="btn btn-primary" style="margin-top:26px;">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="section-head center">
+      <div class="eyebrow center">From past trips</div>
+      <h2>What people said after the trip, not before.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">The budget was almost exactly right. No surprise costs, which is the part every other guide got wrong.</p>
+        <div class="review-who"><div class="avatar">M</div><div class="who-meta"><strong>Maya R.</strong>Honeymoon, Zanzibar</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">They flagged a resort we almost booked. The photos didn't match what recent guests posted. Saved the trip.</p>
+        <div class="review-who"><div class="avatar">D</div><div class="who-meta"><strong>Daniel K.</strong>30th Birthday, Kyoto</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Felt like planning with a friend who actually does the research, not an app spitting out generic ideas.</p>
+        <div class="review-who"><div class="avatar">S</div><div class="who-meta"><strong>Sara &amp; Priya</strong>Anniversary, Lisbon</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <a href="reviews.html" class="btn btn-ghost">Read more &amp; leave a review</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="trust-strip">
+      <div class="feat"><div class="ic b2"><svg style="color:#22A06B" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 5-5.5"/></svg></div><div><h4>Verified First</h4><p>No stay reaches your plan unchecked.</p></div></div>
+      <div class="feat"><div class="ic b1"><svg style="color:#E1654A" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></div><div><h4>WhatsApp Support</h4><p>Real replies from a real planner.</p></div></div>
+      <div class="feat"><div class="ic b4"><svg style="color:#F59E0B" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><div><h4>Secure Payments</h4><p>Mobile money or card, confirmed before charge.</p></div></div>
+      <div class="feat"><div class="ic b3"><svg style="color:#6D28D9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1M20.5 3.5v4.6h-4.6"/></svg></div><div><h4>Flexible Plans</h4><p>Revisions included on every full plan.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Some trips you replan.<br><em>This one you get right.</em></h2>
+      <p>Tell us the occasion. We'll handle the research, the math, and the fine print.</p>
+      <a href="#request" class="btn btn-coral">Start your request</a>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="tidewrit-supabase-web.js"></script>
+<script>
+  document.querySelectorAll('.pill-row').forEach(group => {
+    if(group.classList.contains('chips')) return; // multi-select rows manage themselves
+    group.addEventListener('click', e => {
+      const p = e.target.closest('.pill');
+      if(p && group.contains(p)){
+        group.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+        p.classList.add('active');
+      }
+    });
+  });
+
+  const slider = document.getElementById('budgetSlider');
+  const budgetVal = document.getElementById('budgetVal');
+  const ugxHint = document.getElementById('ugxHint');
+  const fmt = n => '$' + Number(n).toLocaleString();
+  function updateBudget(){
+    budgetVal.textContent = fmt(slider.value);
+    ugxHint.textContent = '≈ UGX ' + Math.round(slider.value * 3700).toLocaleString() + ' · mobile money or card';
+  }
+  slider.addEventListener('input', updateBudget); updateBudget();
+
+  // travelers composition
+  const comp = { adults: 2, kids: 0, couples: 1 };
+  const LIMITS = { adults:[1,30], kids:[0,20], couples:[1,10] };
+  function renderComp(){
+    document.getElementById('adultsVal').textContent = comp.adults;
+    document.getElementById('kidsVal').textContent = comp.kids;
+    document.getElementById('couplesVal').textContent = comp.couples + (comp.couples===1?' couple':' couples');
+  }
+  document.querySelectorAll('.stepper').forEach(st => {
+    st.querySelectorAll('.stp-btn').forEach(b => b.addEventListener('click', () => {
+      const k = st.dataset.for, [lo,hi] = LIMITS[k];
+      comp[k] = Math.max(lo, Math.min(hi, comp[k] + Number(b.dataset.d)));
+      if(k==='couples'){ comp.adults = Math.max(comp.adults, comp.couples*2); }
+      renderComp();
+    }));
+  });
+  renderComp();
+  const getTripType = () => { const el = document.querySelector('[data-group="triptype"] .pill.active'); return el ? el.dataset.value : ''; };
+  document.querySelector('[data-group="triptype"]').addEventListener('click', () => {
+    const t = getTripType();
+    document.getElementById('couplesRow').style.display = t==='Couple' ? 'block' : 'none';
+    if(t==='Couple'){ comp.adults = Math.max(comp.adults, comp.couples*2); }
+    if(t==='Solo'){ comp.adults = 1; comp.kids = 0; }
+    renderComp();
+  });
+  function buildTravelers(){
+    const t = getTripType();
+    const ppl = comp.adults + ' adult' + (comp.adults>1?'s':'') + (comp.kids ? ', ' + comp.kids + ' kid' + (comp.kids>1?'s':'') : '');
+    if(t==='Couple') return comp.couples + (comp.couples===1?' couple':' couples') + ' (' + ppl + ')';
+    return (t ? t + ' · ' : '') + ppl;
+  }
+
+
+  // ---------- destination explorer data ----------
+  const DEST = {
+    "Uganda": {
+      "Jinja": ["Adventure", ["White-water rafting","Bungee jumping","Source of the Nile cruise","Itanda Falls","Quad biking"]],
+      "Bwindi Forest": ["Wildlife", ["Gorilla trekking","Batwa cultural trail","Forest nature walks"]],
+      "Queen Elizabeth NP": ["Safari", ["Game drives","Kazinga Channel boat cruise","Tree-climbing lions (Ishasha)"]],
+      "Lake Bunyonyi": ["Relaxation", ["Island canoeing","Swimming (bilharzia-free)","Zip-lining","Island hopping"]],
+      "Entebbe & Kampala": ["Staycation", ["Beach resorts (Entebbe)","Ngamba chimp island","Botanical gardens","Nightlife & dining"]],
+    },
+    "Kenya": {
+      "Diani": ["Beach", ["Diani Beach","Camel beach rides","Kite surfing","Wasini dhow & dolphins","Colobus monkeys"]],
+      "Maasai Mara": ["Safari", ["Great Migration drives","Hot-air balloon safari","Maasai village visit"]],
+      "Mombasa": ["Coast & Culture", ["Nyali Beach","Fort Jesus","Old Town walk","Haller Park"]],
+      "Nairobi": ["City", ["Giraffe Centre","Elephant orphanage","Nairobi National Park","Karen Blixen Museum"]],
+    },
+    "Tanzania": {
+      "Zanzibar": ["Beach", ["Nungwi Beach","Kendwa Beach","Stone Town tour","Mnemba snorkeling","Spice farm","Jozani Forest monkeys","Sunset dhow cruise"]],
+      "Serengeti": ["Safari", ["Migration game drives","Hot-air balloon safari","Big Five spotting"]],
+      "Ngorongoro Crater": ["Safari", ["Crater floor game drive","Maasai boma visit","Crater rim viewpoints"]],
+      "Mount Kilimanjaro": ["Adventure", ["Summit trek (Machame)","Marangu day hike","Coffee farm tours","Chala crater lake"]],
+    },
+    "Rwanda": {
+      "Volcanoes NP": ["Wildlife", ["Gorilla trekking","Golden monkey trek","Dian Fossey hike","Twin lakes viewpoint"]],
+      "Lake Kivu": ["Relaxation", ["Lake beaches","Kayaking","Congo Nile Trail","Hot springs"]],
+      "Kigali": ["City", ["Genocide Memorial","Art studios & coffee","Nyamirambo walking tour","Local food tour"]],
+    },
+    "South Africa": {
+      "Cape Town": ["City & Beach", ["Table Mountain","Bo-Kaap","Camps Bay Beach","Cape Point & penguins","Winelands day trip","V&A Waterfront"]],
+      "Kruger NP": ["Safari", ["Big Five game drives","Panorama Route","Bush walks"]],
+      "Johannesburg": ["City", ["Apartheid Museum","Soweto tour","Gold Reef City","Maboneng precinct"]],
+    },
+    "United Arab Emirates": {
+      "Dubai": ["Luxury & City", ["Burj Khalifa","Desert safari & dunes","JBR Beach","Dubai Mall & fountains","Marina dhow cruise","Old Dubai souks"]],
+      "Abu Dhabi": ["Culture", ["Sheikh Zayed Mosque","Ferrari World","Louvre Abu Dhabi","Corniche beach"]],
+    },
+    "Egypt": {
+      "Cairo": ["History", ["Pyramids of Giza","Egyptian Museum","Nile dinner cruise","Khan el-Khalili bazaar"]],
+      "Sharm El-Sheikh": ["Beach", ["Red Sea diving","Naama Bay","Ras Mohammed snorkeling","Desert stargazing"]],
+    },
+  };
+
+
+  const POPULAR = [["Uganda","Uganda 🇺🇬"],["Kenya","Kenya 🇰🇪"],["Tanzania","Tanzania 🇹🇿"],["Rwanda","Rwanda 🇷🇼"],["South Africa","South Africa 🇿🇦"],["United Arab Emirates","Dubai / UAE 🇦🇪"],["Egypt","Egypt 🇪🇬"]];
+  const WORLD = {
+    "Africa":["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon","Central African Republic","Chad","Comoros","Congo (DRC)","Congo (Republic)","Côte d'Ivoire","Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda","São Tomé & Príncipe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"],
+    "Asia":["Afghanistan","Armenia","Azerbaijan","Bahrain","Bangladesh","Bhutan","Brunei","Cambodia","China","Cyprus","Georgia","India","Indonesia","Iran","Iraq","Israel","Japan","Jordan","Kazakhstan","Kuwait","Kyrgyzstan","Laos","Lebanon","Malaysia","Maldives","Mongolia","Myanmar","Nepal","North Korea","Oman","Pakistan","Palestine","Philippines","Qatar","Saudi Arabia","Singapore","South Korea","Sri Lanka","Syria","Taiwan","Tajikistan","Thailand","Timor-Leste","Turkey","Turkmenistan","United Arab Emirates","Uzbekistan","Vietnam","Yemen"],
+    "Europe":["Albania","Andorra","Austria","Belarus","Belgium","Bosnia & Herzegovina","Bulgaria","Croatia","Czechia","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo","Latvia","Liechtenstein","Lithuania","Luxembourg","Malta","Moldova","Monaco","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","Russia","San Marino","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Ukraine","United Kingdom","Vatican City"],
+    "North America":["Antigua & Barbuda","Bahamas","Barbados","Belize","Canada","Costa Rica","Cuba","Dominica","Dominican Republic","El Salvador","Grenada","Guatemala","Haiti","Honduras","Jamaica","Mexico","Nicaragua","Panama","St. Kitts & Nevis","St. Lucia","St. Vincent & the Grenadines","Trinidad & Tobago","United States"],
+    "South America":["Argentina","Bolivia","Brazil","Chile","Colombia","Ecuador","Guyana","Paraguay","Peru","Suriname","Uruguay","Venezuela"],
+    "Oceania":["Australia","Fiji","Kiribati","Marshall Islands","Micronesia","Nauru","New Zealand","Palau","Papua New Guinea","Samoa","Solomon Islands","Tonga","Tuvalu","Vanuatu"]
+  };
+  const countrySel = document.getElementById('countrySel');
+  const ogPop = document.createElement('optgroup'); ogPop.label = '⭐ Popular with our travelers';
+  POPULAR.forEach(([v,l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; ogPop.appendChild(o); });
+  countrySel.appendChild(ogPop);
+  Object.keys(WORLD).forEach(cont => {
+    const og = document.createElement('optgroup'); og.label = cont;
+    WORLD[cont].forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; og.appendChild(o); });
+    countrySel.appendChild(og);
+  });
+
+  const destWrap = document.getElementById('destWrap'), destChips = document.getElementById('destChips'), spotWrap = document.getElementById('spotWrap'), otherWrap = document.getElementById('otherWrap');
+
+  function clearSurprise(){ const b = document.getElementById('surpriseBtn'); b.classList.remove('active'); }
+
+  countrySel.addEventListener('change', () => {
+    clearSurprise();
+    destChips.innerHTML = ''; spotWrap.innerHTML = '';
+    const c = countrySel.value;
+    if(!c){ destWrap.style.display='none'; otherWrap.style.display='none'; return; }
+    const curated = !!DEST[c];
+    otherWrap.style.display = curated ? 'none' : 'block';
+    destWrap.style.display = curated ? 'block' : 'none';
+    if(!curated){
+      document.querySelector('#otherWrap .f-label').textContent = 'Anything specific in ' + c + '? (optional)';
+      document.getElementById('destInput').placeholder = 'e.g. a city, an island, or "quiet beach town"';
+      const at = (typeof ATLAS !== 'undefined' && ATLAS[c]) ? ATLAS[c].a : null;
+      if(at){
+        const block = document.createElement('div');
+        block.innerHTML = '<label class="f-label">' + c + ' highlights · tap all that excite you</label>';
+        const rowEl = document.createElement('div'); rowEl.className = 'pill-row chips';
+        at.forEach(sp => {
+          const chip = document.createElement('button');
+          chip.type='button'; chip.className='pill'; chip.textContent = sp; chip.dataset.atlas = '1';
+          chip.addEventListener('click', () => chip.classList.toggle('active'));
+          rowEl.appendChild(chip);
+        });
+        block.appendChild(rowEl);
+        spotWrap.appendChild(block);
+        if(ATLAS[c].bt){
+          const hint = document.createElement('div');
+          hint.style.cssText = 'font-size:12px; color:#9AA3B5; margin-top:8px;';
+          hint.textContent = '💡 Best time: ' + ATLAS[c].bt;
+          spotWrap.appendChild(hint);
+        }
+      }
+      return;
+    }
+    document.getElementById('destLabel').textContent = 'Where in ' + c + '? Pick any';
+    Object.keys(DEST[c]).forEach(d => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'pill'; b.dataset.dest = d;
+      b.innerHTML = d + ' <span style="opacity:.55; font-size:11px;">' + DEST[c][d][0] + '</span>';
+      b.addEventListener('click', () => { b.classList.toggle('active'); renderSpots(); });
+      destChips.appendChild(b);
+    });
+  });
+
+  function renderSpots(){
+    const c = countrySel.value;
+    spotWrap.innerHTML = '';
+    destChips.querySelectorAll('.pill.active').forEach(b => {
+      const d = b.dataset.dest;
+      const [cat, spots] = DEST[c][d];
+      const block = document.createElement('div');
+      block.innerHTML = '<label class="f-label">' + d + ' · what would you love? <span style="opacity:.5; text-transform:none; letter-spacing:0;">(tap all that excite you)</span></label>';
+      const rowEl = document.createElement('div');
+      rowEl.className = 'pill-row chips';
+      spots.forEach(sp => {
+        const chip = document.createElement('button');
+        chip.type = 'button'; chip.className = 'pill'; chip.textContent = sp;
+        chip.dataset.spotOf = d;
+        chip.addEventListener('click', () => chip.classList.toggle('active'));
+        rowEl.appendChild(chip);
+      });
+      block.appendChild(rowEl);
+      spotWrap.appendChild(block);
+    });
+  }
+
+  function buildDestination(){
+    if(document.getElementById('surpriseBtn').classList.contains('active')) return 'Surprise me ✨';
+    const c = countrySel.value;
+    if(!c) return 'Open to suggestions';
+    if(!DEST[c]){
+      const picked = Array.from(spotWrap.querySelectorAll('.pill.active')).filter(x=>x.dataset.atlas).map(x=>x.textContent);
+      const t = document.getElementById('destInput').value;
+      const bits = [];
+      if(picked.length) bits.push(picked.join(', '));
+      if(t) bits.push(t);
+      return c + (bits.length ? ' - ' + bits.join(' · ') : '');
+    }
+    const parts = [];
+    destChips.querySelectorAll('.pill.active').forEach(b => {
+      const d = b.dataset.dest;
+      const picked = Array.from(spotWrap.querySelectorAll('.pill.active')).filter(x => x.dataset.spotOf === d).map(x => x.textContent);
+      parts.push(d + (picked.length ? ' (' + picked.join(', ') + ')' : ''));
+    });
+    return c + (parts.length ? ' - ' + parts.join(' · ') : '');
+  }
+
+  // surprise me
+  document.getElementById('surpriseBtn').addEventListener('click', function(){
+    this.classList.toggle('active');
+    if(this.classList.contains('active')){
+      countrySel.value=''; destWrap.style.display='none'; otherWrap.style.display='none';
+      destChips.innerHTML=''; spotWrap.innerHTML='';
+    }
+  });
+
+  // wizard
+  let step = 1;
+  const titles = ['What are we celebrating?','Let\'s talk numbers.','Where do we send the magic?'];
+  const subs = ['Takes about a minute. No payment now.','Honest budgets make honest plans.','One last step and we\'re on it.'];
+  const getActive = g => { const el = document.querySelector(`[data-group="${g}"] .pill.active`); return el ? el.dataset.value : ''; };
+  function showStep(n){
+    step = n;
+    [1,2,3].forEach(k => document.getElementById('fstep'+k).style.display = (k===n?'block':'none'));
+    document.getElementById('stepTitle').textContent = titles[n-1];
+    document.getElementById('stepSub').textContent = subs[n-1];
+    document.getElementById('stepCount').textContent = n + ' / 3';
+    document.querySelectorAll('.stepdot').forEach((d,i)=> d.style.background = (i < n ? 'var(--blue)' : '#E4EAF6'));
+    document.getElementById('backBtn').style.display = n===1 ? 'none' : 'block';
+    document.getElementById('nextBtn').textContent = n===3 ? 'Send my request 🚀' : 'Next →';
+    if(n===3){
+      document.getElementById('miniSummary').innerHTML =
+        '<b style="color:var(--navy);">Your escape so far:</b><br>' +
+        (getActive('occasion')||'Trip') + ' · ' + (getActive('mood')||'any mood') + ' · ' + buildTravelers() + '<br>' +
+        'Budget ' + fmt(slider.value) + ' · ' + (document.getElementById('dateFrom').value||'flexible') + ' → ' + (document.getElementById('dateTo').value||'flexible') + '<br>' +
+        'Destination: ' + buildDestination() +
+        (document.getElementById('passportSel').value ? '<br>Passport: ' + document.getElementById('passportSel').value : '') +
+        (document.getElementById('fromInput').value ? ' · Flying from ' + document.getElementById('fromInput').value : '');
+    }
+  }
+  // fill the passport dropdown with the same country list, Uganda first
+  (function(){
+    var sel = document.getElementById('passportSel');
+    var src = document.getElementById('countrySel');
+    if(!sel || !src) return;
+    var names = [];
+    for (var i=0; i<src.options.length; i++){
+      var v = src.options[i].value;
+      if (v) names.push(src.options[i].textContent.trim());
+    }
+    names.sort();
+    var priority = ['Uganda','Kenya','Tanzania','Rwanda'];
+    priority.slice().reverse().forEach(function(p){
+      var ix = names.indexOf(p);
+      if (ix > -1) { names.splice(ix,1); names.unshift(p); }
+    });
+    names.forEach(function(n){
+      var o = document.createElement('option');
+      o.value = n; o.textContent = n; sel.appendChild(o);
+    });
+    var other = document.createElement('option');
+    other.value = 'Other'; other.textContent = 'Other / not listed';
+    sel.appendChild(other);
+  })();
+
+  document.getElementById('backBtn').addEventListener('click', ()=> showStep(step-1));
+
+  // ==== requests now go to Supabase (see tidewrit-supabase-web.js) ====
+
+  document.getElementById('nextBtn').addEventListener('click', async () => {
+    if(step === 1){
+      if(!getActive('occasion')){ document.querySelector('[data-group="occasion"]').style.outline='2px solid #E1654A'; setTimeout(()=>document.querySelector('[data-group="occasion"]').style.outline='',1200); return; }
+      showStep(2); return;
+    }
+    if(step === 2){ showStep(3); return; }
+    // step 3: send
+    const email = document.getElementById('emailInput');
+    if(!email.value || !email.value.includes('@')){ email.style.borderColor = '#E1654A'; email.focus(); return; }
+    // spam honeypot - silently accept and stop
+    if(document.getElementById('hp_company').value){
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+      return;
+    }
+
+    const btn = document.getElementById('nextBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const dFrom = document.getElementById('dateFrom').value;
+    const dTo   = document.getElementById('dateTo').value;
+    const dates = (dFrom || dTo) ? ((dFrom || 'Flexible') + ' → ' + (dTo || 'Flexible')) : 'Flexible';
+
+    const result = await submitTripRequest({
+      name:        document.getElementById('nameInput').value,
+      email:       email.value,
+      whatsapp:    document.getElementById('waInput').value,
+      destination: buildDestination(),
+      travelDates: dates,
+      occasion:    getActive('occasion'),
+      mood:        getActive('mood'),
+      travellers:  buildTravelers(),
+      budget:      fmt(slider.value),
+      passportCountry: document.getElementById('passportSel').value,
+      departure:       document.getElementById('fromInput').value
+    });
+
+    if(!result.ok){
+      btn.disabled = false;
+      btn.textContent = 'Try again →';
+      alert(result.error || 'Something went wrong - please try again, or email hello.tidewrite@gmail.com');
+      return;
+    }
+
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  });
+</script>
+</body>
+</html>

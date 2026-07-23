@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Trips | Tidewrit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="mytrips.html">
+
+<header class="page-hero" style="--ph:url('images/mytrips.jpg')">
+  <div class="wrap">
+    <div class="eyebrow">My Trips</div>
+    <h1>Welcome back. Your trips live here.</h1>
+    <p>Enter the email you used for your trip request and we'll pull up every plan we've built for you. Your trip pages, budgets and assistant, always saved.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap" style="max-width:520px;">
+    <div class="card" style="padding:32px; box-shadow:var(--shadow);">
+      <div id="lookupBody">
+        <label class="f-label" style="color:#7A8296;">Your email</label>
+        <input class="input-w" type="email" id="luEmail" placeholder="you@email.com" style="margin-bottom:16px;">
+        <button class="btn btn-primary" id="luBtn" style="width:100%;">Find my trips</button>
+        <p style="font-size:12.5px; color:var(--grey); margin-top:12px; text-align:center;">First time here? <a href="index.html#request" style="color:var(--blue); font-weight:600;">Start a trip request</a> and your account is created automatically.</p>
+      </div>
+      <div id="luResults" style="display:none;">
+        <h3 style="font-size:19px; color:var(--navy); margin-bottom:14px;">Your trips</h3>
+        <div id="tripList"></div>
+        <button class="btn btn-ghost" style="width:100%; margin-top:10px;" onclick="location.reload()">Look up a different email</button>
+      </div>
+      <div id="luEmpty" style="display:none; text-align:center; padding:12px 0;">
+        <div style="font-size:34px; margin-bottom:10px;">🔍</div>
+        <p style="font-size:14.5px; color:var(--grey); margin-bottom:16px;">We couldn't find trips under that email yet. If you recently paid, your plan may still be in the works, or try the email you used on the request form.</p>
+        <a class="btn btn-primary" href="index.html#request" style="width:100%;">Start a new trip</a>
+        <button class="btn btn-ghost" style="width:100%; margin-top:10px;" onclick="location.reload()">Try another email</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+document.getElementById('luBtn').addEventListener('click', async () => {
+  const email = document.getElementById('luEmail').value.trim().toLowerCase();
+  if(!email || !email.includes('@')) return;
+  const btn = document.getElementById('luBtn');
+  btn.textContent = 'Searching...';
+  try{
+    const r = await fetch('/api/mytrips', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email })
+    });
+    const data = await r.json();
+    document.getElementById('lookupBody').style.display = 'none';
+    if(data.trips && data.trips.length){
+      document.getElementById('tripList').innerHTML = data.trips.map(t => `
+        <a href="${t.url}" style="display:flex; justify-content:space-between; align-items:center; gap:10px; text-decoration:none; border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:10px;">
+          <div><div style="font-weight:700; color:var(--navy); font-size:15px;">${t.title}</div>
+          <div style="font-size:12.5px; color:var(--grey);">${t.dates || ''}</div></div>
+          <span style="color:var(--blue); font-weight:700; font-size:13px;">Open →</span>
+        </a>`).join('');
+      document.getElementById('luResults').style.display = 'block';
+    } else {
+      document.getElementById('luEmpty').style.display = 'block';
+    }
+  }catch(e){
+    btn.textContent = 'Find my trips';
+    alert('Lookup is unavailable right now. Message us on WhatsApp and we will send your trip link directly.');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Trip Plan | Tidewrit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<div id="lockGate" style="display:none; position:fixed; inset:0; z-index:500; background:linear-gradient(160deg,#0F1B3D,#1E3FA8); align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; border-radius:22px; padding:38px 30px; max-width:400px; width:100%; text-align:center;">
+    <div style="margin-bottom:12px; color:#2E6BFF;"><span style="display:inline-block; width:44px; height:44px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+    <h2 style="font-size:22px; color:#0F1B3D; margin-bottom:8px;">This trip plan is private</h2>
+    <p style="font-size:14px; color:#5B6474; margin-bottom:22px;">Enter the passcode we sent you on WhatsApp to unlock your plan.</p>
+    <input id="gatePass" type="password" placeholder="Passcode" style="width:100%; border:1px solid rgba(16,24,40,.15); border-radius:12px; padding:14px 15px; font-size:16px; text-align:center; letter-spacing:2px; font-family:inherit; margin-bottom:14px;">
+    <button id="gateBtn" class="btn btn-primary" style="width:100%;">Unlock my plan</button>
+    <p id="gateErr" style="display:none; color:#E1654A; font-size:13px; margin-top:12px;">That passcode didn't work. Check the message we sent you, or WhatsApp us.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+  TIDEWRIT TRIP TEMPLATE
+  For each customer: copy this file (e.g. trips/swabra-zanzibar.html),
+  edit ONLY the TRIP object below, upload. That's their personal link.
+============================================================ -->
+<script>
+// TIER: "outline" | "full" | "concierge"  - controls what this customer sees
+// ENCRYPTED MODE: paste the blob from admin-encrypt.html into ENCRYPTED_TRIP
+// and delete/empty the TRIP object. The page will ask for the passcode.
+const ENCRYPTED_TRIP = ""; // e.g. "aB3x...==.pQ9...==.zZk...=="
+
+const TRIP = {
+  tier: "concierge",
+  title: "Zanzibar Getaway",
+  occasion: "Anniversary",
+  days: "5 Days",
+  travelers: "2 Travelers",
+  dates: "12 – 16 Oct 2026",
+  description: "A romantic escape to Zanzibar filled with beautiful beaches, historic charm, and unforgettable experiences.",
+  coverImage: "", // optional: "zanzibar-cover.jpg"
+  currency: "UGX",
+  totalCost: "UGX 4,900,000",
+  perPerson: "UGX 2,450,000",
+  underBudget: "UGX 100,000 under budget",
+  underBudgetNote: "Great job! You have some room for extra experiences.",
+  costs: [
+    ["✈️","Flights","UGX 1.8M"],
+    ["🏨","Hotel","UGX 1.5M"],
+    ["🍽️","Food","UGX 600K"],
+    ["🚐","Transport","UGX 350K"],
+    ["🎯","Activities","UGX 500K"],
+    ["🛡️","Buffer","UGX 150K"],
+  ],
+  whatsapp: "+256709864155", // your business WhatsApp
+  locations: [ // map pins in visit order: [name, lat, lng]
+    ["Airport & Stone Town", -6.2220, 39.2229],
+    ["Pongwe Beach (hotel)", -6.0333, 39.4000],
+    ["Mnemba Island", -5.8206, 39.3854],
+    ["Jozani Forest", -6.2667, 39.4167],
+  ],
+  itinerary: [
+    { label:"Day 1", date:"12 Oct", color:"#2E6BFF", icon:"✈️", title:"Arrival in Zanzibar", weather:"☀️ 28°C",
+      acts:[["09:30","✈️","Arrival at Abeid Amani Karume Airport",""],["11:00","🚐","Private transfer","to your hotel"],["14:00","🏨","Check-in & relax",""],["18:30","🍽️","Sunset dinner","at The Rock Restaurant"]] },
+    { label:"Day 2", date:"13 Oct", color:"#38BDF8", icon:"🌊", title:"Beach & Ocean Adventure", weather:"☀️ 29°C",
+      acts:[["08:00","☕","Breakfast at hotel",""],["10:00","🤿","Mnemba Island","Snorkeling Tour"],["14:00","🍽️","Lunch at","The Island Pongwe"],["16:30","🏖️","Relax at Pongwe","Beach"],["19:00","🎵","Dinner & live music","at Fisherman's Cove"]] },
+    { label:"Day 3", date:"14 Oct", color:"#22A06B", icon:"🏛️", title:"Explore Stone Town", weather:"⛅ 27°C",
+      acts:[["08:30","🚶","Stone Town","Walking Tour"],["12:30","🍽️","Lunch at","Forodhani Gardens"],["14:00","🛍️","Shopping & local","souvenir hunt"],["17:00","📸","Sunset at","Forodhani Fort"],["19:30","🍽️","Dinner at","Emerson on Hurumzi"]] },
+    { label:"Day 4", date:"15 Oct", color:"#F59E0B", icon:"🌿", title:"Spice Farm & Nature", weather:"☀️ 28°C",
+      acts:[["09:00","🌱","Visit Spice Farm","& learn"],["12:30","🍽️","Traditional lunch","experience"],["14:30","🐒","Jozani Forest &","Red Colobus Monkeys"],["17:00","🏖️","Relax at","Kendwa Beach"],["19:00","🍽️","Dinner at","Langi Langi Beach Bar"]] },
+    { label:"Day 5", date:"16 Oct", color:"#2E6BFF", icon:"✈️", title:"Last Moments & Departure", weather:"☀️ 28°C",
+      acts:[["09:00","☕","Leisure breakfast","at hotel"],["11:00","🛍️","Last-minute","shopping"],["13:00","🚐","Transfer to","the airport"],["15:30","✈️","Departure","Until next time, Zanzibar!"]] },
+  ],
+  stays: [
+    { name:"Matcha Beach House", meta:"UGX 550K / night · Beachfront · Breakfast included", verified:"Photo-verified: 200+ recent guest photos match the listing", img:"" },
+    { name:"Pongwe Bay Resort", meta:"UGX 780K / night · Private beach · Pool", verified:"Photo-verified: layout, pool and beach access confirmed", img:"" },
+  ],
+  budgetRows: [
+    ["Flights (RT, 2 pax)","UGX 1,800,000"],
+    ["Hotel (4 nights)","UGX 1,500,000"],
+    ["Food & drinks","UGX 600,000"],
+    ["Transport & transfers","UGX 350,000"],
+    ["Activities & tours","UGX 500,000"],
+    ["Buffer (tips, extras)","UGX 150,000"],
+  ],
+  hiddenCosts: "Included above: visa fees, resort/seaweed tax, airport transfers, tipping norms. No surprises at the airport.",
+  notes: "Book the Mnemba snorkeling tour at least 3 days ahead. Carry small USD bills for the visa on arrival. The Rock Restaurant needs a reservation, we suggest booking for high tide. Sunscreen is pricey on the island, bring your own.",
+};
+</script>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 200 200"><g transform="translate(100,100)"><circle r="92" fill="none" stroke="#2E6BFF" stroke-width="6" stroke-dasharray="12 8"/><circle r="73" fill="#2E6BFF"/><path d="M -47 7 C -38 -7, -28 -7, -19 7 C -14 14, -9 16, -5 12 L 36 -31" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="-31" r="7" fill="#FFD98A"/></g></svg>
+      <span class="word">Tidewrit</span>
+    </a>
+    <span style="font-size:13px; color:var(--grey);">Your personal trip plan</span>
+  </div>
+</nav>
+
+<div class="wrap plan-layout">
+  <main>
+    <div class="plan-cover" id="cover"></div>
+    <div class="plan-head">
+      <div>
+        <h1 id="tTitle"></h1>
+        <div class="plan-meta" id="tMeta"></div>
+        <p class="plan-desc" id="tDesc"></p>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-t="itin">Itinerary</button>
+      <button class="tab" data-t="budget">Budget</button>
+      <button class="tab" data-t="stays">Stays</button>
+      <button class="tab" data-t="notes">Notes</button>
+    </div>
+
+    <div class="tabpane on" id="pane-itin"></div>
+
+    <div class="tabpane" id="pane-budget">
+      <div class="day-card">
+        <h3>Full budget breakdown</h3>
+        <div class="budget-rows" id="budgetRows" style="margin-top:14px;"></div>
+        <div class="doc-flag" id="hiddenCosts" style="margin-top:16px;"></div>
+      </div>
+    </div>
+
+    <div class="tabpane" id="pane-stays"></div>
+
+    <div class="tabpane" id="pane-notes">
+      <div class="day-card"><h3>Planner's notes</h3><p style="margin-top:12px; font-size:14.5px; color:#414B5F;" id="notesText"></p></div>
+    </div>
+  </main>
+
+  <aside class="sideb">
+    <div class="sum-card">
+      <h4>Trip Summary <span class="on-budget">On Budget</span></h4>
+      <div class="total-cost" id="tCost"></div>
+      <div class="pp" id="tPP"></div>
+      <div class="cost-grid" id="costGrid"></div>
+    </div>
+    <div class="budget-note">
+      <div class="bi">✓</div>
+      <div><b id="ubTitle"></b><p id="ubNote"></p></div>
+    </div>
+    <div class="sum-card">
+      <h4 style="margin-bottom:12px;">Map Overview <a id="fullMap" target="_blank" style="font-size:12px; color:var(--blue); text-decoration:none; font-weight:600; float:right;">See full map</a></h4>
+      <div id="tripMap" style="height:210px; border-radius:14px; overflow:hidden; background:linear-gradient(150deg,#DCE9FF,#EFF5FF);"></div>
+    </div>
+    <div class="sum-card">
+      <h4 style="margin-bottom:12px;">Quick Actions</h4>
+      <div class="qa-grid">
+        <a class="qa-btn" id="waBtn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg> WhatsApp us</a>
+        <button class="qa-btn" onclick="window.print()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="8" rx="2"/><rect x="7" y="14" width="10" height="7"/></svg> Print / PDF</button>
+        <button class="qa-btn" onclick="navigator.share ? navigator.share({title:document.title, url:location.href}) : navigator.clipboard.writeText(location.href).then(()=>alert('Link copied'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6L12 6.4M13.5 10.5a4 4 0 0 0-5.6 0l-3 3a4 4 0 0 0 5.6 5.6L12 17.6"/></svg> Share trip</button>
+        <button class="qa-btn" onclick="document.getElementById('chatFab').click()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2zM19 16l.9 2.3 2.1.7-2.1.9L19 22l-.9-2.1-2.1-.9 2.1-.7z"/></svg> Ask AI</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- AI assistant -->
+<button class="chat-fab" id="chatFab" aria-label="Ask about your trip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2zM19 16l.9 2.3 2.1.7-2.1.9L19 22l-.9-2.1-2.1-.9 2.1-.7z"/></svg></button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head"><h5>Trip Assistant</h5><p>Ask anything about your plan</p></div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg bot">Hi! I know this trip inside out. Ask me anything: "Is Stone Town safe at night?", "Where should we eat on Day 2?", "What should I pack?"</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatIn" placeholder="Type your question...">
+    <button id="chatSend">➤</button>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// ---------- crypto (AES-256-GCM, PBKDF2 150k) ----------
+async function deriveKey(pass, salt){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:150000, hash:'SHA-256'}, km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+}
+const unb64 = s => Uint8Array.from(atob(s), c=>c.charCodeAt(0));
+async function decryptTrip(blob, pass){
+  const [s,i,c] = blob.split('.');
+  const key = await deriveKey(pass, unb64(s));
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:unb64(i)}, key, unb64(c));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+// ---------- tier config ----------
+const TIERS = {
+  outline:  { tabs:['budget'],                          ai:false, label:'The Outline' },
+  full:     { tabs:['itin','budget','stays','notes'],   ai:true,  label:'The Full Plan' },
+  concierge:{ tabs:['itin','budget','stays','notes'],   ai:true,  label:'The Concierge' },
+};
+
+function renderTrip(TRIP){
+document.title = TRIP.title + " | Tidewrit";
+$('tTitle').textContent = TRIP.title;
+const MI = {cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>', us:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 12.5a3.2 3.2 0 1 0-1.5-6M21.5 20a6 6 0 0 0-4.5-5.8"/></svg>', fl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4.5c4-2 8 2 14 .5v9c-6 1.5-10-2.5-14-.5"/></svg>'};
+$('tMeta').innerHTML = [ MI.cal+' '+TRIP.days, MI.us+' '+TRIP.travelers, MI.cal+' '+TRIP.dates, MI.fl+' '+TRIP.occasion ].map(x=>`<span>${x}</span>`).join('');
+$('tDesc').textContent = TRIP.description;
+$('cover').innerHTML = `<img src="${TRIP.coverImage || 'images/plan-cover.jpg'}" alt="" onerror="this.remove()">`;
+$('tCost').textContent = TRIP.totalCost;
+$('tPP').textContent = 'Per person: ' + TRIP.perPerson;
+$('costGrid').innerHTML = TRIP.costs.map(([i,l,v])=>`<div class="cost-cell"><div class="cl">${i} ${l}</div><div class="cv">${v}</div></div>`).join('');
+$('ubTitle').textContent = 'You are ' + TRIP.underBudget;
+$('ubNote').textContent = TRIP.underBudgetNote;
+$('waBtn').href = 'https://wa.me/' + TRIP.whatsapp.replace(/[^0-9]/g,'') + '?text=' + encodeURIComponent('Hi! Question about my trip: ' + TRIP.title);
+
+$('pane-itin').innerHTML = TRIP.itinerary.map(d=>`
+  <div class="day-block">
+    <div class="day-rail">
+      <div class="day-dot" style="background:${d.color}">${d.icon}</div>
+      <div class="dl">${d.label}</div><div class="dd">${d.date}</div>
+    </div>
+    <div class="day-card">
+      <h3>${d.title} <span class="wx">${d.weather}</span></h3>
+      <div class="acts">${d.acts.map((a,i)=>`
+        <div class="act"><span class="ai">${a[1]}</span><div><div class="at">${a[0]}</div><div class="al">${a[2]}</div>${a[3]?`<div class="as">${a[3]}</div>`:''}</div></div>
+        ${i<d.acts.length-1?'<span class="arrow">→</span>':''}`).join('')}
+      </div>
+    </div>
+  </div>`).join('');
+
+$('budgetRows').innerHTML = TRIP.budgetRows.map(([l,v])=>`<div class="doc-line"><span>${l}</span><strong>${v}</strong></div>`).join('')
+  + `<div class="doc-line total"><span>Total</span><strong>${TRIP.totalCost}</strong></div>`;
+$('hiddenCosts').textContent = '⚑ ' + TRIP.hiddenCosts;
+
+$('pane-stays').innerHTML = TRIP.stays.map(s=>`
+  <div class="stay-card">
+    <div class="stay-thumb">${s.img?`<img src="${s.img}" alt="">`:''}</div>
+    <div><h5>${s.name}</h5><div class="sm">${s.meta}</div><div class="vtag">${s.verified}</div></div>
+  </div>`).join('');
+$('notesText').textContent = TRIP.notes;
+
+// ---------- tier gating ----------
+const tier = TIERS[TRIP.tier] || TIERS.full;
+const upgradeWa = 'https://wa.me/' + TRIP.whatsapp.replace(/[^0-9]/g,'') + '?text=' + encodeURIComponent("Hi! I'd like to upgrade my plan: " + TRIP.title);
+document.querySelectorAll('.tab').forEach(t=>{
+  if(!tier.tabs.includes(t.dataset.t)){
+    t.innerHTML = '🔒 ' + t.textContent;
+    t.classList.add('locked');
+    const pane = $('pane-'+t.dataset.t);
+    pane.innerHTML = `<div class="day-card" style="text-align:center; padding:40px 24px;">
+      <div style="font-size:36px; margin-bottom:12px;">🔒</div>
+      <h3 style="justify-content:center;">Included in The Full Plan</h3>
+      <p style="font-size:14px; color:var(--grey); margin:10px auto 20px; max-width:380px;">Your ${tier.label} covers the budget and destination shortlist. Upgrade to unlock the day-by-day itinerary, verified stays, planner's notes and the AI assistant.</p>
+      <a class="btn btn-primary" href="${upgradeWa}" target="_blank">Upgrade on WhatsApp</a></div>`;
+  }
+});
+if(!tier.tabs.includes('itin')){
+  // land outline customers on Budget tab
+  document.querySelector('.tab[data-t=itin]').classList.remove('on');
+  $('pane-itin').classList.remove('on');
+  document.querySelector('.tab[data-t=budget]').classList.add('on');
+  $('pane-budget').classList.add('on');
+}
+if(!tier.ai){ $('chatFab').style.display='none'; }
+if(TRIP.tier === 'concierge'){
+  document.querySelector('.sum-card h4 .on-budget').insertAdjacentHTML('beforebegin','<span class="on-budget" style="background:#EFEAFE; color:#6D28D9; margin-right:6px;">Concierge · Live support</span>');
+}
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tabpane').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');
+  $('pane-'+t.dataset.t).classList.add('on');
+}));
+
+window.CURRENT_TRIP = TRIP;
+} // end renderTrip
+
+// ---------- boot: KV (?t=id), encrypted file, or plain ----------
+(async ()=>{
+  const tid = new URLSearchParams(location.search).get('t');
+  let ENC = ENCRYPTED_TRIP;
+  if(tid){
+    try{
+      const r = await fetch('/api/trip?id=' + encodeURIComponent(tid));
+      const d = await r.json();
+      if(d.blob) ENC = d.blob;
+      else {
+        document.querySelector('.plan-layout').innerHTML = '<div class="day-card" style="grid-column:1/-1; text-align:center; padding:60px 24px;"><div style="font-size:40px; margin-bottom:12px;">🔎</div><h3 style="justify-content:center;">Trip not found</h3><p style="color:var(--grey); font-size:14.5px; margin-top:8px;">Check the link we sent you, or message us on WhatsApp and we\'ll resend it.</p></div>';
+        return;
+      }
+    }catch(e){}
+  }
+  if(ENC){
+    const gate = $('lockGate');
+    gate.style.display = 'flex';
+    const tryUnlock = async ()=>{
+      try{
+        const t = await decryptTrip(ENC, $('gatePass').value);
+        gate.style.display = 'none';
+        renderTrip(t); initMap(t); window.CURRENT_TRIP = t;
+      }catch(e){ $('gateErr').style.display = 'block'; }
+    };
+    $('gateBtn').addEventListener('click', tryUnlock);
+    $('gatePass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock(); });
+  } else {
+    renderTrip(TRIP); initMap(TRIP);
+  }
+})();
+
+// ---------- AI assistant ----------
+const fab = $('chatFab'), panel = $('chatPanel'), msgs = $('chatMsgs'), input = $('chatIn');
+fab.addEventListener('click', ()=> panel.classList.toggle('open'));
+const history = [];
+function addMsg(text, who){
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.textContent = text;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+async function send(){
+  const q = input.value.trim();
+  if(!q) return;
+  input.value = '';
+  addMsg(q, 'me');
+  history.push({role:'user', content:q});
+  const thinking = addMsg('…', 'bot');
+  try{
+    const r = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ trip: window.CURRENT_TRIP, messages: history.slice(-10) })
+    });
+    if(!r.ok) throw new Error('offline');
+    const data = await r.json();
+    thinking.textContent = data.reply;
+    history.push({role:'assistant', content:data.reply});
+  }catch(e){
+    thinking.textContent = "I can't reach the assistant right now. Tap 'WhatsApp us' in Quick Actions and we'll answer personally!";
+  }
+}
+$('chatSend').addEventListener('click', send);
+input.addEventListener('keydown', e=>{ if(e.key==='Enter') send(); });
+
+// ---------- map ----------
+function initMap(TRIP){
+if(TRIP.locations && TRIP.locations.length){
+  $('fullMap').href = 'https://www.google.com/maps/dir/' + TRIP.locations.map(l=>l[1]+','+l[2]).join('/');
+  const lscript = document.createElement('script');
+  lscript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  lscript.onload = () => {
+    const map = L.map('tripMap', {zoomControl:false, attributionControl:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
+    const pts = TRIP.locations.map(l=>[l[1], l[2]]);
+    TRIP.locations.forEach((l,i)=>{
+      L.marker([l[1],l[2]], {icon: L.divIcon({className:'', html:`<div style="width:26px;height:26px;border-radius:50%;background:#2E6BFF;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(16,24,40,.35);">${i+1}</div>`, iconSize:[26,26], iconAnchor:[13,13]})})
+        .addTo(map).bindPopup(l[0]);
+    });
+    L.polyline(pts, {color:'#2E6BFF', weight:2.5, dashArray:'6 7', opacity:.8}).addTo(map);
+    map.fitBounds(pts, {padding:[26,26]});
+  };
+  document.body.appendChild(lscript);
+}
+}
+</script>
+</body>
+</html>

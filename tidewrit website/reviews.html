@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews | Tidewrit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="reviews.html">
+
+<header class="page-hero" style="--ph:url('images/reviews.jpg')">
+  <div class="wrap">
+    <div class="eyebrow">From past trips</div>
+    <h1>What people said after the trip, not before.</h1>
+    <p>Every review here is from a completed, delivered plan. Not a beta tester, not a friend. Reviews get the verified tag only after we match them to a real plan.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">The budget was almost exactly right. No surprise costs, which is the part every other guide got wrong.</p>
+        <div class="review-who"><div class="avatar">M</div><div class="who-meta"><strong>Maya R.</strong>Honeymoon, Zanzibar</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">They flagged a resort we almost booked. The photos didn't match what recent guests posted. Saved the trip.</p>
+        <div class="review-who"><div class="avatar">D</div><div class="who-meta"><strong>Daniel K.</strong>30th Birthday, Kyoto</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote">Felt like planning with a friend who actually does the research, not an app spitting out generic ideas.</p>
+        <div class="review-who"><div class="avatar">S</div><div class="who-meta"><strong>Sara &amp; Priya</strong>Anniversary, Lisbon</div></div>
+        <div class="verified-tag">Verified completed trip</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap" style="max-width:720px;">
+    <div class="section-head">
+      <div class="eyebrow">Your turn</div>
+      <h2>Traveled with a Tidewrit plan?</h2>
+      <p>Leave a review. It gets the verified tag once we match it to your plan.</p>
+    </div>
+    <div class="card" style="padding:32px;">
+      <div id="revBody">
+        <div class="frow" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;">
+          <input class="input-w" type="text" id="revName" placeholder="Your name">
+          <input class="input-w" type="text" id="revTrip" placeholder="Trip, e.g. Honeymoon, Zanzibar">
+        </div>
+        <div style="margin-bottom:16px;">
+          <div id="starPick" style="font-size:28px; letter-spacing:6px; cursor:pointer; color:#D8D2C4;" aria-label="Star rating">
+            <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+          </div>
+        </div>
+        <textarea class="input-w" id="revText" rows="4" placeholder="How did the trip go? What did the plan get right, or miss?" style="margin-bottom:20px;"></textarea>
+        <button class="btn btn-primary" id="revSubmit">Submit review</button>
+      </div>
+      <div id="revThanks" style="display:none; text-align:center; padding:24px 8px;">
+        <div style="font-size:38px; margin-bottom:10px;">✓</div>
+        <h3 style="font-size:20px; color:var(--teal-800); margin-bottom:8px;">Thank you</h3>
+        <p style="font-size:14.5px; color:var(--grey);">Your review is in for verification. Once matched to your plan, it appears here with the verified tag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Want a review-worthy trip of your own?</h2>
+      <p>Start with the occasion. We'll take it from there.</p>
+      <a href="index.html#request" class="btn btn-coral">Start your request</a>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+  const stars = document.querySelectorAll('#starPick span');
+  let rating = 0;
+  stars.forEach(st => st.addEventListener('click', () => {
+    rating = Number(st.dataset.v);
+    stars.forEach(x => x.style.color = Number(x.dataset.v) <= rating ? '#C9A227' : '#D8D2C4');
+  }));
+  document.getElementById('revSubmit').addEventListener('click', () => {
+    // NOTE: wire to Formspree / backend on deploy.
+    document.getElementById('revBody').style.display = 'none';
+    document.getElementById('revThanks').style.display = 'block';
+  });
+</script>
+</body>
+</html>

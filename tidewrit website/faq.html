@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | Tidewrit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="faq.html">
+
+<header class="page-hero" style="--ph:url('images/faq.jpg')">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h1>Fair questions, straight answers.</h1>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap" style="max-width:760px;">
+    <details open>
+      <summary>How is this different from asking ChatGPT?</summary>
+      <p>A general AI generates plausible-sounding plans from old training data. We research your actual dates and prices, then a human verifies every stay against guest photos from the last 90 days. The difference shows up when you arrive and the pool actually looks like the picture.</p>
+    </details>
+    <details>
+      <summary>Do you book the trip for me?</summary>
+      <p>By default you book directly with airlines and hotels, which keeps your money protected under their policies, and we give you exact links and timing so it takes minutes. If you'd rather not deal with it at all, assisted booking is available as a paid add-on: you send the funds, approve each purchase, and we book on your behalf.</p>
+    </details>
+    <details>
+      <summary>What does "photo-verified" actually mean?</summary>
+      <p>We compare the listing's marketing photos against photos real guests posted recently. Mismatched pools, smaller rooms, "beachfront" that's a road away. If we find it, the listing is excluded from your plan and we tell you why.</p>
+    </details>
+    <details>
+      <summary>What if my budget is unrealistic?</summary>
+      <p>We tell you before you pay for a full plan. If your budget and destination don't match, we'll say so and suggest either a different destination or a different trip length. That honesty is the product.</p>
+    </details>
+    <details>
+      <summary>Do you only plan big trips?</summary>
+      <p>No. Staycations, baecations, weekend getaways, a birthday night out of town: if it has a budget and a vibe, we plan it. Small escapes get the same verification as big ones.</p>
+    </details>
+    <details>
+      <summary>How do I pay?</summary>
+      <p>Prices are shown in USD, and you pay the UGX equivalent via MTN or Airtel mobile money, or by card. The exact UGX amount is confirmed before you pay.</p>
+    </details>
+    <details>
+      <summary>How fast do I get my plan?</summary>
+      <p>The Outline in 3 days, The Full Plan in 5. Rush delivery is available if your dates are close. Just mention it in your request.</p>
+    </details>
+    <details>
+      <summary>What happens after I submit the request form?</summary>
+      <p>We send you a payment link by email and WhatsApp. Once payment confirms, research starts, and within 3–5 days you receive your private trip page link and passcode: full itinerary, budget, verified stays, map and a built-in AI assistant. Every trip stays saved under your email in My Trips.</p>
+    </details>
+    <details>
+      <summary>Can you plan group trips?</summary>
+      <p>Yes. Group trips fit best in The Concierge tier, which includes a cost-split sheet tracking who paid what and unlimited revisions while the group makes up its mind.</p>
+    </details>
+    <details>
+      <summary>What if something changes during my trip?</summary>
+      <p>Concierge trips include a live WhatsApp assistant. Weather turns, a place closes, a flight slips: message us and we adjust the plan while you're on the ground.</p>
+    </details>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Still curious? <em>Just ask.</em></h2>
+      <p>Send your question with the request form and we'll answer before anything is paid.</p>
+      <a href="index.html#request" class="btn btn-coral">Start your request</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// injected FAQ item
+document.addEventListener('DOMContentLoaded', ()=>{
+  const list = document.querySelector('details') && document.querySelector('details').parentElement;
+  if(list){
+    const d = document.createElement('details');
+    d.innerHTML = '<summary>I\'m coming TO Uganda - what do you offer?</summary><p>Our home ground gets our full-stack service: the $100 Uganda Landing Package includes the complete trip plan, an Entebbe airport pickup by our vetted driver, a pocket WiFi device for up to 7 days, our three-wave WhatsApp Welcome Pack, and a local support line during your stay. See Pricing for details.</p>';
+    list.appendChild(d);
+  }
+});
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
